@@ -11,23 +11,14 @@ public class FeatureNode implements Feature {
         this.value = value;
     }
 
-    /**
-     * @since 1.9
-     */
     public int getIndex() {
         return index;
     }
 
-    /**
-     * @since 1.9
-     */
     public double getValue() {
         return value;
     }
 
-    /**
-     * @since 1.9
-     */
     public void setValue(double value) {
         this.value = value;
     }
