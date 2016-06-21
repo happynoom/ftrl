@@ -11,4 +11,5 @@ The author is Xiaoyu Fang (Rain) from China. Please quot the source whenever you
 Reference
 
 Follow-the-Regularized-Leader and Mirror Descent: Equivalence Theorems and L1 Regularization. H. Brendan McMahan
+
 Ad Click Prediction: a View from the Trenches. H. Brendan McMahan, Gary Holt, D. Sculley, Michael Young,Dietmar Ebner, Julian Grady, Lan Nie, Todd Phillips, Eugene Davydov,Daniel Golovin, Sharat Chikkerur, Dan Liu, Martin Wattenberg, Arnar Mar Hrafnkelsson, Tom Boulos, Jeremy Kubica
