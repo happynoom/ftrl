@@ -3,6 +3,7 @@ package com.ilighti.ml.ftrl;
 import com.ilighti.ml.Feature;
 import com.ilighti.ml.Problem;
 
+import java.util.Map;
 import java.util.Random;
 
 import static com.ilighti.ml.CommonUtils.copyOf;
@@ -157,7 +158,9 @@ public class Ftrl {
 
             for(int iter = 0; iter < MAX_ITER; iter ++) {
                 for (int i = 0; i < sub_prob.l; i++) {
-                    model.ftrlSolvers[0].trainOne(sub_prob.x[i], sub_prob.y[i]);
+                    for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) sub_prob.y[i], 1); r++) {
+                        model.ftrlSolvers[0].trainOne(sub_prob.x[i], sub_prob.y[i]);
+                    }
                 }
             }
         } else {
@@ -176,12 +179,22 @@ public class Ftrl {
                     sub_prob.y[k] = 0;
                 for(int iter = 0; iter < MAX_ITER; iter ++) {
                     for (int j = 0; j < sub_prob.l; j++) {
-                        model.ftrlSolvers[i].trainOne(sub_prob.x[j], sub_prob.y[j]);
+                        for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) sub_prob.y[i], 1); r++) {
+                            model.ftrlSolvers[i].trainOne(sub_prob.x[j], sub_prob.y[j]);
+                        }
                     }
                 }
             }
         }
         return model;
+    }
+
+    private <S, T> T getOrDefault(Map<S, T> data, S key, T defaultValue) {
+        T val = data.get(key);
+        if(val == null) {
+            return defaultValue;
+        }
+        return val;
     }
 
     public double predict(Feature[] x, Model model, double[] probabilities) {

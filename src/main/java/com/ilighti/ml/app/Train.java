@@ -64,7 +64,8 @@ public class Train {
                 + "-o lambda 1 : set the lambda 1 (default 1)%n"
                 + "-t lambda 2 : set the lambda 2 (default 1)%n"
                 + "-s bias : set the bias (default -1)%n"
-                + "-v nr_fold : do nr_fold validation");
+                + "-v nr_fold : do nr_fold validation"
+                + "-w${label} weight : weight of the samples with ${label}");
         System.exit(1);
     }
 
@@ -92,6 +93,11 @@ public class Train {
                     break;
                 case 'v':
                     nr_fold = CommonUtils.atoi(argv[i]);
+                    break;
+                case 'w':
+                    int weightLabel = Integer.parseInt(argv[i - 1].substring(2));
+                    int weight = Integer.parseInt(argv[i]);
+                    param.labelWeigths.put(weightLabel,weight);
                     break;
                 default:
                     System.err.println("unknown option");
