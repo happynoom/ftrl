@@ -155,12 +155,22 @@ public class Ftrl {
                 sub_prob.y[k] = +1;
             for (; k < sub_prob.l; k++)
                 sub_prob.y[k] = 0;
+            //random problem
+            int[] rand = new int[sub_prob.l];
+            for (k = 0; k < sub_prob.l; k++) {
+                rand[k] = k;
+            }
+            Random random = new Random(System.currentTimeMillis());
+            for (k = 0; k < sub_prob.l; k++) {
+                int val = random.nextInt(l - k);
+                swap(rand, k, k + val);
+            }
 
             for(int iter = 0; iter < MAX_ITER; iter ++) {
                 for (int i = 0; i < sub_prob.l; i++) {
-                    for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) prob.y[perm[i]], 1); r++) {
-                        model.ftrlSolvers[0].trainOne(sub_prob.x[i], sub_prob.y[i]);
-                    }
+                    //for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) prob.y[perm[i]], 1); r++) {
+                        model.ftrlSolvers[0].trainOne(sub_prob.x[rand[i]], sub_prob.y[rand[i]]);
+                    //}
                 }
             }
         } else {
@@ -177,11 +187,22 @@ public class Ftrl {
                     sub_prob.y[k] = +1;
                 for (; k < sub_prob.l; k++)
                     sub_prob.y[k] = 0;
+                //random problem
+                int[] rand = new int[sub_prob.l];
+                for (k = 0; k < sub_prob.l; k++) {
+                    rand[k] = k;
+                }
+                Random random = new Random(System.currentTimeMillis());
+                for (k = 0; k < sub_prob.l; k++) {
+                    int val = random.nextInt(l - k);
+                    swap(rand, k, k + val);
+                }
                 for(int iter = 0; iter < MAX_ITER; iter ++) {
                     for (int j = 0; j < sub_prob.l; j++) {
-                        for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) prob.y[perm[j]], 1); r++) {
-                            model.ftrlSolvers[i].trainOne(sub_prob.x[j], sub_prob.y[j]);
-                        }
+                        //int defaultWeight = sub_prob.y[j] == 1 ? sub_prob.x.length/count[i] : 1;
+                        //for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) prob.y[perm[j]], defaultWeight); r++) {
+                            model.ftrlSolvers[i].trainOne(sub_prob.x[rand[j]], sub_prob.y[rand[j]]);
+                        //}
                     }
                 }
             }
