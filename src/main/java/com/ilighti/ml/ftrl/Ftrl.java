@@ -158,7 +158,7 @@ public class Ftrl {
 
             for(int iter = 0; iter < MAX_ITER; iter ++) {
                 for (int i = 0; i < sub_prob.l; i++) {
-                    for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) sub_prob.y[i], 1); r++) {
+                    for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) prob.y[perm[i]], 1); r++) {
                         model.ftrlSolvers[0].trainOne(sub_prob.x[i], sub_prob.y[i]);
                     }
                 }
@@ -179,7 +179,7 @@ public class Ftrl {
                     sub_prob.y[k] = 0;
                 for(int iter = 0; iter < MAX_ITER; iter ++) {
                     for (int j = 0; j < sub_prob.l; j++) {
-                        for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) sub_prob.y[i], 1); r++) {
+                        for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) prob.y[perm[j]], 1); r++) {
                             model.ftrlSolvers[i].trainOne(sub_prob.x[j], sub_prob.y[j]);
                         }
                     }
