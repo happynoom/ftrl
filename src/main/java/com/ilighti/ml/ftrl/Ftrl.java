@@ -168,9 +168,7 @@ public class Ftrl {
 
             for(int iter = 0; iter < MAX_ITER; iter ++) {
                 for (int i = 0; i < sub_prob.l; i++) {
-                    //for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) prob.y[perm[i]], 1); r++) {
-                        model.ftrlSolvers[0].trainOne(sub_prob.x[rand[i]], sub_prob.y[rand[i]]);
-                    //}
+                    model.ftrlSolvers[0].trainOne(sub_prob.x[rand[i]], sub_prob.y[rand[i]]);
                 }
             }
         } else {
@@ -199,10 +197,7 @@ public class Ftrl {
                 }
                 for(int iter = 0; iter < MAX_ITER; iter ++) {
                     for (int j = 0; j < sub_prob.l; j++) {
-                        //int defaultWeight = sub_prob.y[j] == 1 ? sub_prob.x.length/count[i] : 1;
-                        //for(int r = 0; r < getOrDefault(parameter.labelWeigths, (int) prob.y[perm[j]], defaultWeight); r++) {
-                            model.ftrlSolvers[i].trainOne(sub_prob.x[rand[j]], sub_prob.y[rand[j]]);
-                        //}
+                        model.ftrlSolvers[i].trainOne(sub_prob.x[rand[j]], sub_prob.y[rand[j]]);
                     }
                 }
             }
@@ -210,13 +205,13 @@ public class Ftrl {
         return model;
     }
 
-    private <S, T> T getOrDefault(Map<S, T> data, S key, T defaultValue) {
-        T val = data.get(key);
-        if(val == null) {
-            return defaultValue;
-        }
-        return val;
-    }
+//    private <S, T> T getOrDefault(Map<S, T> data, S key, T defaultValue) {
+//        T val = data.get(key);
+//        if(val == null) {
+//            return defaultValue;
+//        }
+//        return val;
+//    }
 
     public double predict(Feature[] x, Model model, double[] probabilities) {
         double label = -1;

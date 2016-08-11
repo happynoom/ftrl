@@ -13,10 +13,7 @@ public class Parameter {
     public double lambdaTwo = 1.;
     public double bias = 1.;
 
-    public Map<Integer, Integer> labelWeigths = null;
-
-    public Parameter() {
-        labelWeigths = new HashMap<Integer, Integer>();
+    public Parameter(){
     }
 
     public Parameter(double alpha, double beta, double lambdaOne, double lambdaTwo, double bias) {
@@ -25,7 +22,6 @@ public class Parameter {
         this.lambdaOne = lambdaOne;
         this.lambdaTwo = lambdaTwo;
         this.bias = bias;
-        labelWeigths = new HashMap<Integer, Integer>();
     }
 
     public double getAlpha() {
