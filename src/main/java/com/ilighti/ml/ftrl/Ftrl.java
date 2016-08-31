@@ -160,7 +160,7 @@ public class Ftrl {
             for (k = 0; k < sub_prob.l; k++) {
                 rand[k] = k;
             }
-            Random random = new Random(System.currentTimeMillis());
+            //Random random = new Random();
             for (k = 0; k < sub_prob.l; k++) {
                 int val = random.nextInt(l - k);
                 swap(rand, k, k + val);
@@ -190,7 +190,7 @@ public class Ftrl {
                 for (k = 0; k < sub_prob.l; k++) {
                     rand[k] = k;
                 }
-                Random random = new Random(System.currentTimeMillis());
+                //Random random = new Random();
                 for (k = 0; k < sub_prob.l; k++) {
                     int val = random.nextInt(l - k);
                     swap(rand, k, k + val);
