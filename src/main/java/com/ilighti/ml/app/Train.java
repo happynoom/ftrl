@@ -18,33 +18,33 @@ public class Train {
     private String modelFilename;
     Parameter param = new Parameter();
     Model model;
-    private int nr_fold = 0;
+    private int nrFold = 0;
 
-    public void do_cross_validation(Problem prob, int nr_fold) {
-        double total_error = 0;
+    public void doCrossValidation(Problem prob, int nrFfold) {
+        double totalError = 0;
         double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
         double[] target = new double[prob.l];
 
         long start, stop;
         start = System.currentTimeMillis();
-        new Ftrl().crossValidation(prob, param, nr_fold, target);
+        new Ftrl().crossValidation(prob, param, nrFold, target);
         stop = System.currentTimeMillis();
         System.out.println("time: " + (stop - start) + " ms");
 
-        int total_correct = 0;
+        int totalCorrect = 0;
         for (int i = 0; i < prob.l; i++)
-            if (target[i] == prob.y[i]) ++total_correct;
+            if (target[i] == prob.y[i]) ++totalCorrect;
 
-        System.out.printf("correct: %d%n", total_correct);
-        System.out.printf("Cross Validation Accuracy = %g%%%n", 100.0 * total_correct / prob.l);
+        System.out.printf("correct: %d%n", totalCorrect);
+        System.out.printf("Cross Validation Accuracy = %g%%%n", 100.0 * totalCorrect / prob.l);
     }
 
     public void run(String[] args) {
-        parse_command_line(args);
+        parseCommandLine(args);
         try {
             Problem prob = Problem.readFromFile(new File(inputFilename), param.getBias());
-            if (nr_fold > 0) {
-                do_cross_validation(prob, nr_fold);
+            if (nrFold > 0) {
+                doCrossValidation(prob, nrFold);
             } else {
                 model = new Ftrl().train(prob, param);
                 model.save(new File(modelFilename));
@@ -56,7 +56,7 @@ public class Train {
         }
     }
 
-    private void exit_with_help() {
+    private void exitWithHelp() {
         System.out.printf("Usage: train [options] training_set_file [model_file]%n" //
                 + "options:%n"
                 + "-a alpha : set the parameter alpha (default 0.1)%n"
@@ -64,16 +64,16 @@ public class Train {
                 + "-o lambda 1 : set the lambda 1 (default 1)%n"
                 + "-t lambda 2 : set the lambda 2 (default 1)%n"
                 + "-s bias : set the bias (default -1)%n"
-                + "-v nr_fold : do nr_fold validation");
+                + "-v nrFold : do nrFold validation");
         System.exit(1);
     }
 
-    public void parse_command_line(String argv[]) {
+    public void parseCommandLine(String argv[]) {
         int i;
         // parse options
         for (i = 0; i < argv.length; i++) {
             if (argv[i].charAt(0) != '-') break;
-            if (++i >= argv.length) exit_with_help();
+            if (++i >= argv.length) exitWithHelp();
             switch (argv[i - 1].charAt(1)) {
                 case 'a':
                     param.setAlpha(CommonUtils.atof(argv[i]));
@@ -91,17 +91,17 @@ public class Train {
                     param.setBias(CommonUtils.atof(argv[i]));
                     break;
                 case 'v':
-                    nr_fold = CommonUtils.atoi(argv[i]);
+                    nrFold = CommonUtils.atoi(argv[i]);
                     break;
                 default:
                     System.err.println("unknown option");
-                    exit_with_help();
+                    exitWithHelp();
             }
         }
 
         // determine filenames
 
-        if (i >= argv.length) exit_with_help();
+        if (i >= argv.length) exitWithHelp();
 
         inputFilename = argv[i];
 

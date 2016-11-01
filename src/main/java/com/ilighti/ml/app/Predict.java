@@ -20,28 +20,28 @@ public class Predict {
     private String outputFilename;
 
     public void run(String[] args) {
-        parse_command_line(args);
+        parseCommandLine(args);
         try {
             Problem problem = Problem.readProblem(new File(testFilename), -1.);
             Model model = Model.load(new File(modelFilename));
             if(model == null) {
-                exit_with_help();
+                exitWithHelp();
             }
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(outputFilename)));
             bufferedWriter.write("labels " + join(model.getLabel()) + "\n");
             Ftrl ftrl = new Ftrl();
             double[] probabilities = new double[model.getNrClass()];
-            int total_correct = 0;
+            int totalCorrect = 0;
             for(int i=0; i<problem.l; i++) {
                 Double label = ftrl.predict(problem.x[i], model, probabilities);
                 if(label.equals(problem.y[i])) {
-                    ++total_correct;
+                    ++totalCorrect;
                 }
                 bufferedWriter.write(label.toString() + " " + join(probabilities) + "\n");
             }
             bufferedWriter.close();
-            System.out.printf("correct: %d%n", total_correct);
-            System.out.printf("Cross Validation Accuracy = %g%%%n", 100.0 * total_correct / problem.l);
+            System.out.printf("correct: %d%n", totalCorrect);
+            System.out.printf("Cross Validation Accuracy = %g%%%n", 100.0 * totalCorrect / problem.l);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidInputDataException e) {
@@ -62,10 +62,10 @@ public class Predict {
         }
         return stringBuilder.toString();
     }
-    public void parse_command_line(String argv[]) {
+    public void parseCommandLine(String argv[]) {
         int i = 0;
         if(argv.length < 3) {
-            exit_with_help();
+            exitWithHelp();
         }
 
         testFilename = argv[i];
@@ -73,7 +73,7 @@ public class Predict {
         outputFilename = argv[i+2];
     }
 
-    private static void exit_with_help() {
+    private static void exitWithHelp() {
         System.out.printf("Usage: predict test_file model_file output_file%n");
         System.exit(1);
     }

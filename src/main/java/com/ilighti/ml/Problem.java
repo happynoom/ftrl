@@ -75,11 +75,11 @@ public class Problem {
         return readProblem(file, bias);
     }
 
-    private static Problem constructProblem(List<Double> vy, List<Feature[]> vx, int max_index, double bias) {
+    private static Problem constructProblem(List<Double> vy, List<Feature[]> vx, int maxIndex, double bias) {
         Problem prob = new Problem();
         prob.bias = bias;
         prob.l = vy.size();
-        prob.n = max_index;
+        prob.n = maxIndex;
         if (bias >= 0) {
             prob.n++;
         }
@@ -89,7 +89,7 @@ public class Problem {
 
             if (bias >= 0) {
                 assert prob.x[i][prob.x[i].length - 1] == null;
-                prob.x[i][prob.x[i].length - 1] = new FeatureNode(max_index + 1, bias);
+                prob.x[i][prob.x[i].length - 1] = new FeatureNode(maxIndex + 1, bias);
             }
         }
 
@@ -104,7 +104,7 @@ public class Problem {
         BufferedReader fp = new BufferedReader(new FileReader(file));
         List<Double> vy = new ArrayList<Double>();
         List<Feature[]> vx = new ArrayList<Feature[]>();
-        int max_index = 0;
+        int maxIndex = 0;
 
         int lineNr = 0;
 
@@ -161,13 +161,13 @@ public class Problem {
                     }
                 }
                 if (m > 0) {
-                    max_index = Math.max(max_index, x[m - 1].getIndex());
+                    maxIndex = Math.max(maxIndex, x[m - 1].getIndex());
                 }
 
                 vx.add(x);
             }
 
-            return constructProblem(vy, vx, max_index, bias);
+            return constructProblem(vy, vx, maxIndex, bias);
         } finally {
             fp.close();
         }
