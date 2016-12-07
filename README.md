@@ -1,6 +1,10 @@
 #Introduction
 ftrl is a Java version of Follow-the-Regularized-Leader algorithm published in paper "Follow-the-Regularized-Leader and Mirror Descent: Equivalence Theorems and L1 Regularization". It can be used for classification problems with online convex optimization.
 
+#Usage
+java -cp *.jar com.ilighti.ml.app.Train data/sample_libsvm_data.txt model
+java -cp *.jar com.ilighti.ml.app.Predict data/sample_libsvm_data.txt model ouput
+
 #Bug report
 
 Contact happynoom@163.com to report any bugs.
