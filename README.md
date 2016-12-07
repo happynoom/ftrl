@@ -3,6 +3,7 @@ ftrl is a Java version of Follow-the-Regularized-Leader algorithm published in p
 
 #Usage
 java -cp *.jar com.ilighti.ml.app.Train data/sample_libsvm_data.txt model
+
 java -cp *.jar com.ilighti.ml.app.Predict data/sample_libsvm_data.txt model ouput
 
 #Bug report
