@@ -1,8 +1,5 @@
 package com.ilighti.ml.ftrl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by rain on 16-6-14.
  */

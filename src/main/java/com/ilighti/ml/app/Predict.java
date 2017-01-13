@@ -1,5 +1,4 @@
 package com.ilighti.ml.app;
-;
 import com.ilighti.ml.InvalidInputDataException;
 import com.ilighti.ml.Problem;
 import com.ilighti.ml.ftrl.Ftrl;

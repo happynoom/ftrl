@@ -3,7 +3,6 @@ package com.ilighti.ml.ftrl;
 import com.ilighti.ml.Feature;
 import com.ilighti.ml.Problem;
 
-import java.util.Map;
 import java.util.Random;
 
 import static com.ilighti.ml.CommonUtils.copyOf;
