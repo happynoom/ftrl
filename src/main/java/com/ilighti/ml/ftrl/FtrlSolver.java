@@ -11,8 +11,8 @@ import java.util.HashMap;
 public class FtrlSolver implements Serializable {
     private double alpha = .1;
     private double beta = 1.0;
-    private double lambdaOne = .1;
-    private double lambdaTwo = 1.;
+    private double lambdaOne = 1.;
+    private double lambdaTwo = .1;
     private HashMap<Integer, Double> omega = null;
     private HashMap<Integer, Double> zed = null;
     private HashMap<Integer, Double> fieldSum = null;
@@ -83,6 +83,10 @@ public class FtrlSolver implements Serializable {
         return sigmoid(x, omega);
     }
 
+    private double bound(double val, double upperBound, double lowerBound) {
+        return Math.max(Math.min(val, upperBound), lowerBound);
+    }
+
     private double sigmoid(Feature[] x, HashMap<Integer, Double> omega) {
         double ret = 0.0;
         for (Feature node : x) {
@@ -91,7 +95,7 @@ public class FtrlSolver implements Serializable {
                 weight = 0.0;
             ret += weight * node.getValue();
         }
-        return 1.0 / (1.0 + Math.exp(-ret));
+        return 1.0 / (1.0 + Math.exp(-bound(ret, 35, -35)));
     }
 
     public double getAlpha() {
