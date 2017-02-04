@@ -6,7 +6,7 @@ package com.ilighti.ml.ftrl;
 public class Parameter {
     public double alpha = 0.1;
     public double beta = 1.;
-    public double lambdaOne = 1.;
+    public double lambdaOne = .1;
     public double lambdaTwo = 1.;
     public double bias = 1.;
 

@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class FtrlSolver implements Serializable {
     private double alpha = .1;
     private double beta = 1.0;
-    private double lambdaOne = 1.;
+    private double lambdaOne = .1;
     private double lambdaTwo = 1.;
     private HashMap<Integer, Double> omega = null;
     private HashMap<Integer, Double> zed = null;
@@ -47,6 +47,8 @@ public class FtrlSolver implements Serializable {
                 int sgn = z > 0 ? 1 : -1;
                 weight = -(z - sgn * lambdaOne) / ((beta + Math.sqrt(ni)) / alpha + lambdaTwo);
                 omega.put(index, weight);
+            } else {
+                omega.put(index, 0.);
             }
         }
         double p = sigmoid(x, omega);
