@@ -101,7 +101,7 @@ public class Ftrl {
         if (prob.n == 0) throw new IllegalArgumentException("problem has zero features");
         if (prob.l == 0) throw new IllegalArgumentException("problem has zero instances");
         for (Feature[] nodes : prob.x) {
-            int indexBefore = 0;
+            int indexBefore = -1;
             for (Feature n : nodes) {
                 if (n.getIndex() <= indexBefore) {
                     throw new IllegalArgumentException("feature nodes must be sorted by index in ascending order");

@@ -130,14 +130,17 @@ public class Problem {
 
                 int m = st.countTokens() / 2;
                 Feature[] x;
+                int j = -1;
                 if (bias >= 0) {
                     x = new Feature[m + 1];
+                    j++;
+                    x[j] = new FeatureNode(0, bias);
                 } else {
                     x = new Feature[m];
                 }
                 int indexBefore = 0;
-                for (int j = 0; j < m; j++) {
-
+                while(st.hasMoreTokens()) {
+                    j++;
                     token = st.nextToken();
                     int index;
                     try {
